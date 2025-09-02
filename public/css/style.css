@@ -1,19 +1,44 @@
-/* ===== ЦВЕТОВАЯ ТЕМА ===== */
+/* ===== ЦВЕТОВЫЕ ТЕМЫ ===== */
 :root {
+  /* Тема по умолчанию: Тёплый неон */
+  --primary: #FF3E8D;
+  --primary-hover: #FF6B35;
+  --bg: #1E1220;
+  --card-bg: #2A1A30;
+  --text: #FFE5EC;
+  --shadow: rgba(255, 62, 141, 0.3);
+  --border: rgba(255, 255, 255, 0.1);
+  --modal-bg: rgba(0, 0, 0, 0.8);
+}
+
+/* Тема 1: Синтвейв */
+.theme-synthwave {
   --primary: #BD26FF;
   --primary-hover: #FF2ED6;
   --bg: #0F0229;
   --card-bg: #1A0534;
   --text: #E0B0FF;
   --shadow: rgba(189, 38, 255, 0.3);
-  --modal-bg: rgba(0, 0, 0, 0.8);
   --border: rgba(255, 255, 255, 0.1);
 }
 
+/* Тема 2: Классика (светлая) */
+.theme-classic {
+  --primary: #3182ce;
+  --primary-hover: #2b6cb0;
+  --bg: #f0f2f5;
+  --card-bg: #fff;
+  --text: #2d3748;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== ОБЩИЕ СТИЛИ ===== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background 0.3s, color 0.3s, border 0.3s;
 }
 
 body {
@@ -21,7 +46,6 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  transition: background 0.3s, color 0.3s;
 }
 
 .container {
@@ -37,12 +61,12 @@ header {
 
 header h1 {
   font-size: 2.8em;
-  background: linear-gradient(90deg, #BD26FF, #FF2ED6);
+  background: linear-gradient(90deg, var(--primary), var(--primary-hover));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 10px;
-  text-shadow: 0 0 10px rgba(189, 38, 255, 0.4);
+  text-shadow: 0 0 10px var(--shadow);
 }
 
 header p {
@@ -63,7 +87,7 @@ header p {
 }
 
 .stats strong {
-  color: #FF2ED6;
+  color: var(--primary);
   font-weight: 600;
 }
 
@@ -108,10 +132,10 @@ header p {
 }
 
 .game-card h3 {
-  color: #BD26FF;
+  color: var(--primary);
   margin-bottom: 12px;
   font-size: 1.4em;
-  text-shadow: 0 0 8px rgba(189, 38, 255, 0.3);
+  text-shadow: 0 0 8px var(--shadow);
 }
 
 .game-card p {
@@ -132,13 +156,13 @@ header p {
   font-weight: 600;
   font-size: 0.95em;
   transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(189, 38, 255, 0.4);
+  box-shadow: 0 0 10px var(--shadow);
 }
 
 .btn:hover {
   background: var(--primary-hover);
   transform: scale(1.05);
-  box-shadow: 0 0 15px rgba(255, 46, 214, 0.6);
+  box-shadow: 0 0 15px rgba(255, 107, 53, 0.6);
 }
 
 .btn.disabled {
@@ -167,6 +191,7 @@ header p {
   cursor: pointer;
   transition: all 0.3s;
   z-index: 10;
+  font-weight: bold;
 }
 
 .rules-btn:hover {
@@ -225,6 +250,7 @@ header p {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s;
+  font-weight: bold;
 }
 
 .modal-close:hover {
@@ -252,12 +278,40 @@ header p {
   margin: 8px 0;
 }
 
+/* ===== КНОПКА СМЕНЫ ТЕМЫ ===== */
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 0.9em;
+  color: var(--text);
+  cursor: pointer;
+  box-shadow: 0 4px 12px var(--shadow);
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+}
+
+.theme-toggle::before {
+  content: "🎨";
+  font-size: 1.2em;
+}
+
 /* ===== ФУТЕР ===== */
 .discord-link {
   display: block;
   margin: 30px auto;
   text-align: center;
-  color: #BD26FF;
+  color: var(--primary);
   font-weight: 600;
   text-decoration: none;
   font-size: 1.1em;
@@ -265,7 +319,7 @@ header p {
 }
 
 .discord-link:hover {
-  color: #FF2ED6;
+  color: var(--primary-hover);
   text-decoration: underline;
 }
 
@@ -280,12 +334,12 @@ footer {
 }
 
 footer a {
-  color: #BD26FF;
+  color: var(--primary);
   margin: 0 10px;
   text-decoration: none;
   transition: color 0.3s;
 }
 
 footer a:hover {
-  color: #FF2ED6;
+  color: var(--primary-hover);
 }
