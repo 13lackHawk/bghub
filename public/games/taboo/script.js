@@ -48,8 +48,8 @@ setInterval(() => {
 // Клик по кнопке "Готов"
 nextBtn.addEventListener('click', () => {
   if (nextBtn.textContent === 'Готов') {
-    nextBtn.style.backgroundColor = '#FF6B35'; // Цвет при наведении
+    nextBtn.style.backgroundColor = '#ff8c00'; // Оранжевый цвет
   } else {
-    nextBtn.style.backgroundColor = '#FF3E8D'; // Возвращаем обратно
+    nextBtn.style.backgroundColor = '#0066cc'; // Синий цвет
   }
 });
