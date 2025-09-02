@@ -6,7 +6,7 @@
   <title>BGHUB — Настольные игры онлайн</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
-<body>
+<body class="theme-warm-neon">
   <div class="container">
     <header>
       <h1>🎲 BGHUB</h1>
@@ -18,28 +18,36 @@
     </div>
 
     <div class="games-grid">
+      <!-- Werewords -->
       <div class="game-card">
-        <h3>Слово Волка</h3>
+        <h3>Werewords</h3>
         <p>Угадай слово, пока оборотень не скрыл правду</p>
         <a href="/games/werewords" class="btn disabled">В разработке</a>
+        <div class="rules-btn" onclick="openModal('werewords')">?</div>
       </div>
 
+      <!-- So Clover! -->
       <div class="game-card">
-        <h3>Клевер!</h3>
+        <h3>So Clover!</h3>
         <p>Связывай слова через общие понятия</p>
         <a href="/games/soclover" class="btn disabled">В разработке</a>
+        <div class="rules-btn" onclick="openModal('soclover')">?</div>
       </div>
 
+      <!-- Taboo -->
       <div class="game-card">
-        <h3>Табу</h3>
+        <h3>Taboo</h3>
         <p>Объясни слово, избегая 5 запрещённых ассоциаций</p>
         <a href="/games/taboo" class="btn">Играть</a>
+        <div class="rules-btn" onclick="openModal('taboo')">?</div>
       </div>
 
+      <!-- Landmarks -->
       <div class="game-card">
-        <h3>Ориентиры</h3>
-        <p>Построй правильный путь из слов, используя ассоциации</p>
+        <h3>Landmarks</h3>
+        <p>Угадай достопримечательность по описанию</p>
         <a href="/games/landmarks" class="btn disabled">В разработке</a>
+        <div class="rules-btn" onclick="openModal('landmarks')">?</div>
       </div>
     </div>
 
@@ -67,6 +75,11 @@
       </div>
     </div>
   </div>
+
+  <!-- Кнопка смены темы -->
+  <button class="theme-toggle" onclick="toggleTheme()">
+    Сменить тему
+  </button>
 
   <script src="/js/main.js"></script>
 </body>
