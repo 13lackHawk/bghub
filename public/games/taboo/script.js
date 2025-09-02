@@ -7,12 +7,12 @@ function joinTeam(side) {
   teamBox.style.backgroundColor = side === 'left' ? '#FF3E8D' : '#BD26FF';
 }
 
-function toggleSettings(show) {
+function toggleSettings() {
   const menu = document.getElementById('settings-menu');
-  if (show) {
-    menu.style.display = 'flex';
-  } else {
+  if (menu.style.display === 'flex') {
     menu.style.display = 'none';
+  } else {
+    menu.style.display = 'flex';
   }
 }
 
@@ -42,13 +42,14 @@ setInterval(() => {
     timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   } else {
     nextBtn.textContent = 'Готов';
-    nextBtn.style.backgroundColor = '#FF6B35'; // Цвет при наведении
   }
 }, 1000);
 
 // Клик по кнопке "Готов"
 nextBtn.addEventListener('click', () => {
   if (nextBtn.textContent === 'Готов') {
-    nextBtn.style.backgroundColor = '#FF6B35'; // Устанавливаем цвет после клика
+    nextBtn.style.backgroundColor = '#FF6B35'; // Цвет при наведении
+  } else {
+    nextBtn.style.backgroundColor = '#FF3E8D'; // Возвращаем обратно
   }
 });
