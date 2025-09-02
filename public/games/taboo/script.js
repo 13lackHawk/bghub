@@ -42,5 +42,13 @@ setInterval(() => {
     timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   } else {
     nextBtn.textContent = 'Готов';
+    nextBtn.style.backgroundColor = '#FF6B35'; // Цвет при наведении
   }
 }, 1000);
+
+// Клик по кнопке "Готов"
+nextBtn.addEventListener('click', () => {
+  if (nextBtn.textContent === 'Готов') {
+    nextBtn.style.backgroundColor = '#FF6B35'; // Устанавливаем цвет после клика
+  }
+});
