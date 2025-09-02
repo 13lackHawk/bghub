@@ -7,9 +7,13 @@ function joinTeam(side) {
   teamBox.style.backgroundColor = side === 'left' ? '#FF3E8D' : '#BD26FF';
 }
 
-function toggleSettings() {
+function toggleSettings(show) {
   const menu = document.getElementById('settings-menu');
-  menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+  if (show) {
+    menu.style.display = 'flex';
+  } else {
+    menu.style.display = 'none';
+  }
 }
 
 function openModal(game) {
@@ -26,13 +30,16 @@ function scoreWord(team) {
 const nextBtn = document.getElementById('next-btn');
 nextBtn.textContent = 'Дальше';
 
-// Таймер
-let timer = 50;
+// Таймер: 60 секунд, формат 00:09
+let timer = 60;
 const timerEl = document.querySelector('.timer');
+
 setInterval(() => {
   if (timer > 0) {
     timer--;
-    timerEl.textContent = `00:${timer}`;
+    const minutes = Math.floor(timer / 60);
+    const seconds = timer % 60;
+    timerEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   } else {
     nextBtn.textContent = 'Готов';
   }
