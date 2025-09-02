@@ -46,10 +46,10 @@ setInterval(() => {
 }, 1000);
 
 // Клик по кнопке "Готов"
-nextBtn.addEventListener('click', () => {
-  if (nextBtn.textContent === 'Готов') {
-    nextBtn.style.backgroundColor = '#ff8c00'; // Оранжевый цвет
-  } else {
-    nextBtn.style.backgroundColor = '#0066cc'; // Синий цвет
-  }
-});
+//nextBtn.addEventListener('click', () => {
+//  if (nextBtn.textContent === 'Готов') {
+//    nextBtn.style.backgroundColor = '#ff8c00'; // Оранжевый цвет
+//  } else {
+//    nextBtn.style.backgroundColor = '#0066cc'; // Синий цвет
+//  }
+//});
