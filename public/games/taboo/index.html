@@ -21,7 +21,7 @@
       gap: 15px;
       margin-bottom: 20px;
       width: 100%;
-      justify-content: flex-end;
+      justify-content: flex-start;
     }
 
     .icon-btn {
@@ -55,6 +55,9 @@
       font-size: 16px;
       cursor: pointer;
       transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .settings-toggle:hover {
@@ -73,23 +76,37 @@
       box-shadow: 0 0 20px var(--shadow);
       z-index: 100;
       display: none;
+      max-width: 400px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .setting-item {
-      margin: 5px 0;
-      font-size: 14px;
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      color: var(--text);
-      transition: color 0.3s;
+      transition: all 0.3s;
     }
 
     .setting-item:hover {
-      color: var(--primary);
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
     }
 
     .teams-container {
       margin: 30px auto;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 300px;
     }
 
     .team-box {
@@ -104,7 +121,7 @@
       justify-content: center;
       cursor: pointer;
       transition: transform 0.3s;
-      margin: 0 10px;
+      position: relative;
     }
 
     .team-box:hover {
@@ -117,10 +134,32 @@
       color: var(--text);
     }
 
+    .team-left {
+      background: #FF3E8D;
+    }
+
+    .team-right {
+      background: #BD26FF;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      color: white;
+    }
+
     .word-area {
       margin: 30px auto;
       text-align: center;
       max-width: 500px;
+      background: var(--card-bg);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px var(--shadow);
+      border: 1px solid var(--border);
     }
 
     .current-word {
@@ -240,6 +279,7 @@
 </head>
 <body class="theme-warm-neon">
   <div class="game-container">
+    <!-- Верхняя панель: иконки -->
     <div class="top-bar">
       <a href="/" class="icon-btn home">🏠</a>
       <div class="icon-btn rules" onclick="openModal('taboo')">❓</div>
@@ -248,8 +288,10 @@
       <div class="icon-btn account">👤</div>
     </div>
 
-    <div class="settings-toggle" onclick="toggleSettings()">⚙️</div>
+    <!-- Шестерёнка: настройки -->
+    <div class="settings-toggle" onmouseover="toggleSettings(true)" onmouseout="toggleSettings(false)">⚙️</div>
 
+    <!-- Меню настроек -->
     <div id="settings-menu" class="settings-menu">
       <div class="setting-item" title="Настройки комнаты">🔧</div>
       <div class="setting-item" title="Приостановить игру">⏸️</div>
@@ -260,18 +302,19 @@
       <div class="setting-item" title="Сменить тему">🎨</div>
     </div>
 
+    <!-- Команды: вертикально -->
     <div class="teams-container">
-      <h3>Teams:</h3>
       <div class="team-box team-left" onclick="joinTeam('left')">
-        <span>🟥</span>
+        <span class="arrow">➡️</span>
         <div class="team-name">Команда 1</div>
       </div>
       <div class="team-box team-right" onclick="joinTeam('right')">
-        <span>🟦</span>
+        <span class="arrow">⬅️</span>
         <div class="team-name">Команда 2</div>
       </div>
     </div>
 
+    <!-- Слово + табу -->
     <div class="word-area">
       <div class="current-word">ПРИШПОРИВАТЬ</div>
       <div class="mines-list">
@@ -283,15 +326,19 @@
       </div>
     </div>
 
-    <div class="timer">00:49</div>
+    <!-- Таймер -->
+    <div class="timer">00:59</div>
 
+    <!-- Кнопка -->
     <div class="action-btn" id="next-btn">Дальше</div>
 
+    <!-- Счёт -->
     <div class="score-buttons">
       <div class="score-btn left-team">⬅️</div>
       <div class="score-btn right-team">➡️</div>
     </div>
 
+    <!-- Пропущенные слова -->
     <div class="missed-words">
       <div class="missed-word" data-mines="лошадь,двигаться,быстрее,темп,галоп">
         ПРИШПОРИВАТЬ
