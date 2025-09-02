@@ -77,29 +77,41 @@ function toggleSettings(show) {
   }
 }
 
+// === Переключение темы ===
 let currentTheme = 0;
 const themes = ['theme-warm-neon', 'theme-white'];
 
 function toggleTheme() {
   const body = document.body;
-  const oldTheme = themes[currentTheme];
+  
+  // Удаляем текущую тему
+  body.classList.remove(themes[currentTheme]);
+  
+  // Переходим к следующей
   currentTheme = (currentTheme + 1) % themes.length;
-  const newTheme = themes[currentTheme];
-
-  body.classList.remove(oldTheme);
-  body.classList.add(newTheme);
-
-  localStorage.setItem('theme', newTheme);
+  
+  // Добавляем новую
+  body.classList.add(themes[currentTheme]);
+  
+  // Сохраняем в localStorage
+  localStorage.setItem('theme', themes[currentTheme]);
 }
 
-// Восстановление темы при загрузке
+// === Восстановление темы при загрузке ===
 document.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme');
+  
+  // Определяем индекс сохранённой темы
   if (savedTheme && themes.includes(savedTheme)) {
-    document.body.classList.remove('theme-warm-neon');
-    document.body.classList.add(savedTheme);
     currentTheme = themes.indexOf(savedTheme);
+  } else {
+    // Тема по умолчанию — тёплый неон
+    currentTheme = 0;
+    localStorage.setItem('theme', 'theme-warm-neon');
   }
+  
+  // Применяем тему
+  document.body.classList.add(themes[currentTheme]);
 
   // Онлайн-статистика
   const onlineCount = document.getElementById('online-count');
