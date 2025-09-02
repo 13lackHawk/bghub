@@ -68,6 +68,15 @@ const themes = [
   'theme-classic'      // Классика
 ];
 
+function toggleSettings(show) {
+  const menu = document.getElementById('settings-menu');
+  if (show) {
+    menu.style.display = 'flex';
+  } else {
+    menu.style.display = 'none';
+  }
+}
+
 function toggleTheme() {
   const body = document.body;
   
