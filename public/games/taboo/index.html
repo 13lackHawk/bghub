@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Taboo — BGHUB</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    .taboo-container {
+      text-align: center;
+      padding: 30px;
+    }
+    .word-card {
+      background: white;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 20px auto;
+      max-width: 500px;
+      font-size: 2em;
+      font-weight: bold;
+      color: #2d3748;
+    }
+    .mines {
+      margin: 20px auto;
+      max-width: 500px;
+      background: #f7fafc;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 0.9em;
+      color: #c53030;
+    }
+    .mines strong {
+      color: #744210;
+    }
+    .btn-lg {
+      padding: 12px 24px;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Taboo</h1>
+    <p>Объясни слово, избегая запрещённых ассоциаций</p>
+
+    <div class="taboo-container">
+      <div class="word-card" id="current-word">Готовится...</div>
+      <div class="mines">
+        Запрещённые слова: <strong id="mines-list">загрузка...</strong>
+      </div>
+      <button class="btn btn-lg" onclick="nextWord()">Следующее слово</button>
+    </div>
+
+    <a href="/" class="btn">← Назад в меню</a>
+  </div>
+
+  <script>
+    // Пока просто заглушка
+    const words = [
+      { word: "Телефон", mines: ["звонок", "связь", "мобильный", "аппарат", "смартфон"] },
+      { word: "Книга", mines: ["страница", "чтение", "автор", "текст", "обложка"] },
+      { word: "Солнце", mines: ["свет", "жара", "небо", "день", "звезда"] }
+    ];
+
+    function nextWord() {
+      const random = Math.floor(Math.random() * words.length);
+      const w = words[random];
+      document.getElementById('current-word').textContent = w.word;
+      document.getElementById('mines-list').textContent = w.mines.join(', ');
+    }
+
+    // Первое слово
+    nextWord();
+  </script>
+</body>
+</html>
