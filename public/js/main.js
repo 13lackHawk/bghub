@@ -77,20 +77,19 @@ function toggleSettings(show) {
   }
 }
 
+let currentTheme = 0;
+const themes = ['theme-warm-neon', 'theme-white'];
+
 function toggleTheme() {
   const body = document.body;
-  
-  // Удаляем текущую тему
-  body.classList.remove(themes[currentTheme]);
-  
-  // Переходим к следующей
+  const oldTheme = themes[currentTheme];
   currentTheme = (currentTheme + 1) % themes.length;
-  
-  // Добавляем новую
-  body.classList.add(themes[currentTheme]);
-  
-  // Сохраняем в localStorage
-  localStorage.setItem('theme', themes[currentTheme]);
+  const newTheme = themes[currentTheme];
+
+  body.classList.remove(oldTheme);
+  body.classList.add(newTheme);
+
+  localStorage.setItem('theme', newTheme);
 }
 
 // Восстановление темы при загрузке
