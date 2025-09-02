@@ -60,23 +60,6 @@ window.onclick = function(event) {
   }
 };
 
-// === Переключение тем ===
-let currentTheme = 0;
-const themes = [
-  'theme-warm-neon',   // Тёплый неон (по умолчанию)
-  'theme-synthwave',   // Синтвейв
-  'theme-classic'      // Классика
-];
-
-function toggleSettings(show) {
-  const menu = document.getElementById('settings-menu');
-  if (show) {
-    menu.style.display = 'flex';
-  } else {
-    menu.style.display = 'none';
-  }
-}
-
 // === Переключение темы ===
 let currentTheme = 0;
 const themes = ['theme-warm-neon', 'theme-white'];
@@ -97,15 +80,16 @@ function toggleTheme() {
   localStorage.setItem('theme', themes[currentTheme]);
 }
 
+// Делаем функцию доступной глобально
+window.toggleTheme = toggleTheme;
+
 // === Восстановление темы при загрузке ===
 document.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme');
   
-  // Определяем индекс сохранённой темы
   if (savedTheme && themes.includes(savedTheme)) {
     currentTheme = themes.indexOf(savedTheme);
   } else {
-    // Тема по умолчанию — тёплый неон
     currentTheme = 0;
     localStorage.setItem('theme', 'theme-warm-neon');
   }
