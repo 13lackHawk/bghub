@@ -11,26 +11,26 @@
   --modal-bg: rgba(0, 0, 0, 0.8);
 }
 
-/* Тема 1: Синтвейв */
-.theme-synthwave {
-  --primary: #BD26FF;
-  --primary-hover: #FF2ED6;
-  --bg: #0F0229;
-  --card-bg: #1A0534;
-  --text: #E0B0FF;
-  --shadow: rgba(189, 38, 255, 0.3);
-  --border: rgba(255, 255, 255, 0.1);
-}
-
-/* Тема 2: Классика (светлая) */
-.theme-classic {
-  --primary: #3182ce;
-  --primary-hover: #2b6cb0;
-  --bg: #f0f2f5;
-  --card-bg: #fff;
+/* Тема 1: Белая */
+.theme-white {
+  --primary: #0066cc; /* Синий */
+  --primary-hover: #ff8c00; /* Оранжевый */
+  --bg: #ffffff;
+  --card-bg: #f9f9f9;
   --text: #2d3748;
   --shadow: rgba(0, 0, 0, 0.1);
   --border: rgba(0, 0, 0, 0.1);
+}
+
+/* Тема 2: Тёплый неон */
+.theme-warm-neon {
+  --primary: #FF3E8D;
+  --primary-hover: #FF6B35;
+  --bg: #1E1220;
+  --card-bg: #2A1A30;
+  --text: #FFE5EC;
+  --shadow: rgba(255, 62, 141, 0.3);
+  --border: rgba(255, 255, 255, 0.1);
 }
 
 /* ===== ОБЩИЕ СТИЛИ ===== */
@@ -173,7 +173,7 @@ header p {
   opacity: 0.6;
 }
 
-/* ===== КНОПКА ПРАВИЛ (?) — УЛУЧШЕННАЯ ===== */
+/* ===== КНОПКА ПРАВИЛ (?) ===== */
 .rules-btn {
   position: absolute;
   top: 12px;
@@ -193,7 +193,6 @@ header p {
   z-index: 10;
   font-weight: bold;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  /* Центральный символ */
   line-height: 1;
 }
 
