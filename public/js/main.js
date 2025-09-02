@@ -60,8 +60,40 @@ window.onclick = function(event) {
   }
 };
 
-// Онлайн-статистика
+// === Переключение тем ===
+let currentTheme = 0;
+const themes = [
+  'theme-warm-neon',   // Тёплый неон (по умолчанию)
+  'theme-synthwave',   // Синтвейв
+  'theme-classic'      // Классика
+];
+
+function toggleTheme() {
+  const body = document.body;
+  
+  // Удаляем текущую тему
+  body.classList.remove(themes[currentTheme]);
+  
+  // Переходим к следующей
+  currentTheme = (currentTheme + 1) % themes.length;
+  
+  // Добавляем новую
+  body.classList.add(themes[currentTheme]);
+  
+  // Сохраняем в localStorage
+  localStorage.setItem('theme', themes[currentTheme]);
+}
+
+// Восстановление темы при загрузке
 document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme && themes.includes(savedTheme)) {
+    document.body.classList.remove('theme-warm-neon');
+    document.body.classList.add(savedTheme);
+    currentTheme = themes.indexOf(savedTheme);
+  }
+
+  // Онлайн-статистика
   const onlineCount = document.getElementById('online-count');
   const count = Math.floor(Math.random() * 100 + 30);
   onlineCount.textContent = `${count} игроков`;
