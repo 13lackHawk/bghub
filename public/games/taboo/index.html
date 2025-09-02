@@ -76,14 +76,14 @@
       box-shadow: 0 0 20px var(--shadow);
       z-index: 100;
       display: none;
-      max-width: 400px;
       flex-wrap: wrap;
       gap: 10px;
+      max-width: 400px;
     }
 
     .setting-item {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
       background: rgba(255, 255, 255, 0.1);
       border-radius: 50%;
       color: white;
@@ -104,19 +104,17 @@
       margin: 30px auto;
       text-align: center;
       display: flex;
-      flex-direction: column;
-      gap: 20px;
+      gap: 30px;
       width: 300px;
     }
 
     .team-box {
-      width: 120px;
-      height: 120px;
+      width: 80px;
+      height: 80px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
@@ -128,27 +126,12 @@
       transform: scale(1.05);
     }
 
-    .team-name {
-      margin-top: 5px;
-      font-size: 14px;
-      color: var(--text);
-    }
-
     .team-left {
       background: #FF3E8D;
     }
 
     .team-right {
       background: #BD26FF;
-    }
-
-    .arrow {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 18px;
-      color: white;
     }
 
     .word-area {
@@ -215,65 +198,27 @@
     }
 
     .score-btn {
-      width: 50px;
-      height: 50px;
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: none;
       color: white;
       font-size: 1.5em;
       cursor: pointer;
       transition: all 0.3s;
+      border-radius: 50%;
     }
 
     .score-btn.left-team {
-      background: #FF3E8D;
+      color: #FF3E8D;
     }
 
     .score-btn.right-team {
-      background: #BD26FF;
+      color: #BD26FF;
     }
 
     .score-btn:hover {
       transform: scale(1.1);
-    }
-
-    .missed-words {
-      margin: 20px auto;
-      max-width: 500px;
-    }
-
-    .missed-word {
-      padding: 10px;
-      margin: 5px 0;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      position: relative;
-      transition: background 0.3s;
-    }
-
-    .missed-word:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .mines-tooltip {
-      display: none;
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--card-bg);
-      padding: 5px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 0.8em;
-      color: var(--text);
-      white-space: nowrap;
-    }
-
-    .missed-word:hover .mines-tooltip {
-      display: block;
     }
   </style>
 </head>
@@ -302,16 +247,10 @@
       <div class="setting-item" title="Сменить тему">🎨</div>
     </div>
 
-    <!-- Команды: вертикально -->
+    <!-- Команды: горизонтально -->
     <div class="teams-container">
-      <div class="team-box team-left" onclick="joinTeam('left')">
-        <span class="arrow">➡️</span>
-        <div class="team-name">Команда 1</div>
-      </div>
-      <div class="team-box team-right" onclick="joinTeam('right')">
-        <span class="arrow">⬅️</span>
-        <div class="team-name">Команда 2</div>
-      </div>
+      <div class="team-box team-left" onclick="joinTeam('left')"></div>
+      <div class="team-box team-right" onclick="joinTeam('right')"></div>
     </div>
 
     <!-- Слово + табу -->
@@ -336,14 +275,6 @@
     <div class="score-buttons">
       <div class="score-btn left-team">⬅️</div>
       <div class="score-btn right-team">➡️</div>
-    </div>
-
-    <!-- Пропущенные слова -->
-    <div class="missed-words">
-      <div class="missed-word" data-mines="лошадь,двигаться,быстрее,темп,галоп">
-        ПРИШПОРИВАТЬ
-        <div class="mines-tooltip">Лошадь, Двигаться, Быстрее, Темп, Галоп</div>
-      </div>
     </div>
   </div>
 
