@@ -326,6 +326,42 @@ header p {
   cursor: pointer;
 }
 
+.word-score {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.score-value {
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+}
+
+.score-controls {
+  display: none;
+  gap: 5px;
+}
+
+.score-controls button {
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.word-score:hover .score-controls {
+  display: flex;
+}
+
 /* ===== ФУТЕР ===== */
 .discord-link {
   display: block;
