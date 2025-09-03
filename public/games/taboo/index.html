@@ -68,8 +68,8 @@
 
     .settings-menu {
       position: fixed;
-      bottom: 15px;
-      right: 40px;
+      bottom: 10px;
+      right: 70px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
@@ -222,9 +222,9 @@
     .action-btn {
       background: var(--primary);
       color: white;
-      padding: 15px 30px;
+      padding: 25px 45px;
       border-radius: 6px;
-      font-size: 1.3em;
+      font-size: 1.5em;
       cursor: pointer;
       transition: all 0.3s;
       margin-top: 20px;
@@ -330,6 +330,14 @@
       <h2>Введите свой никнейм</h2>
       <input type="text" id="nickname-input" class="input-field" placeholder="Ваш ник" style="width: 100%; padding: 10px; margin: 15px 0; border-radius: 6px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text);">
       <button id="nickname-ok" class="btn" style="padding: 10px 20px;">ОК</button>
+    </div>
+  </div>
+  
+  <div class="word-score">
+    <span class="score-value">1</span>
+    <div class="score-controls">
+      <button class="up">↑</button>
+      <button class="down">↓</button>
     </div>
   </div>
 
