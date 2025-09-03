@@ -1,3 +1,16 @@
+// === Логика хоста ===
+let isHost = false;
+
+function checkHost() {
+  // Простой способ: если только один игрок — он хост
+  const players = document.querySelectorAll('.team-box, .spectator-box');
+  if (players.length === 1) {
+    isHost = true;
+  }
+}
+
+checkHost();
+
 // Логика игры Taboo
 let currentWord = "ПРИШПОРИВАТЬ";
 let mines = ["Лошадь", "Двигаться", "Быстрее", "Темп", "Галоп"];
