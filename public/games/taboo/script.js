@@ -27,7 +27,7 @@ function joinSpectators(nick) {
   const list = document.getElementById('spectators-list');
   const box = document.createElement('div');
   box.className = 'spectator-box';
-  box.textContent = nick.charAt(0).toUpperCase();
+  box.textContent = nick;
   box.title = nick;
   box.onclick = () => moveToTeam(nick); // Позже реализуем переход в команду
   list.appendChild(box);
@@ -38,6 +38,12 @@ function joinSpectators(nick) {
 function moveToTeam(nick) {
   const spectatorBox = document.querySelector(`[title="${nick}"]`);
   if (!spectatorBox) return;
+
+  // Если игрок уже в команде — ничего не делаем
+  const playerBox = document.querySelector(`[title="${nick}"]`);
+  if (playerBox && playerBox.parentElement.classList.contains('team-left') || playerBox.parentElement.classList.contains('team-right')) {
+    return;
+  }
 
   // Удаляем из зрителей
   spectatorBox.remove();
@@ -102,8 +108,22 @@ let currentWord = "ПРИШПОРИВАТЬ";
 let mines = ["Лошадь", "Двигаться", "Быстрее", "Темп", "Галоп"];
 
 function joinTeam(side) {
-  const teamBox = document.querySelector(`.team-${side}`);
-  teamBox.style.backgroundColor = side === 'left' ? '#FF3E8D' : '#BD26FF';
+  const playerBox = document.querySelector('.player-box');
+  if (!playerBox) return;
+
+  const currentTeam = playerBox.parentElement.classList.contains('team-left') ? 'left' : 'right';
+  const targetTeam = side === 'left' ? 'left' : 'right';
+
+  if (currentTeam === targetTeam) {
+    return; // Не двигаем, если уже в этой команде
+  }
+
+  // Удаляем из текущей команды
+  playerBox.remove();
+
+  // Добавляем в новую команду
+  const teamBox = document.querySelector(`.team-${targetTeam}`);
+  teamBox.appendChild(playerBox);
 }
 
 function toggleSettings() {
