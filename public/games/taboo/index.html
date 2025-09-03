@@ -129,12 +129,17 @@
       transform: scale(1.05);
     }
 
-    .team-left {
-      background: #FF3E8D;
-    }
-
+    .team-left,
     .team-right {
-      background: #BD26FF;
+      background: #333;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+      position: relative;
     }
 
     .spectators-container {
