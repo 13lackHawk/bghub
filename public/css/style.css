@@ -307,6 +307,25 @@ header p {
   font-size: 1.2em;
 }
 
+.spectators-container {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.spectator-box {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: inline-block;
+  margin: 5px;
+  color: white;
+  font-size: 12px;
+  line-height: 40px;
+  cursor: pointer;
+}
+
 /* ===== ФУТЕР ===== */
 .discord-link {
   display: block;
