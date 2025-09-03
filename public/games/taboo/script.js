@@ -44,7 +44,7 @@ const nextBtn = document.getElementById('next-btn');
 nextBtn.textContent = 'Дальше';
 
 // Таймер: 60 секунд, формат 00:09
-let timer = 60;
+let timer = 2; // 2 секунды для дебага
 const timerEl = document.querySelector('.timer');
 
 setInterval(() => {
