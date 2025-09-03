@@ -69,6 +69,18 @@ function blockTeams() {
   this.style.display = 'none';
 }
 
+function setScore(wordId, value) {
+  // Обнуляем готовность всех игроков
+  const readyBtn = document.getElementById('next-btn');
+  if (readyBtn.textContent === 'Готов') {
+    readyBtn.textContent = 'Дальше';
+  }
+  
+  // Обновляем значение
+  const scoreEl = document.querySelector(`[data-word-id="${wordId}"]`);
+  scoreEl.textContent = value;
+}
+
 // Клик по кнопке "Готов"
 //nextBtn.addEventListener('click', () => {
 //  if (nextBtn.textContent === 'Готов') {
