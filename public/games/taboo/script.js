@@ -58,6 +58,17 @@ setInterval(() => {
   }
 }, 1000);
 
+function blockTeams() {
+  // Блокируем команды
+  const teamBoxes = document.querySelectorAll('.team-box');
+  teamBoxes.forEach(box => {
+    box.style.pointerEvents = 'none';
+  });
+  
+  // Убираем кнопку
+  this.style.display = 'none';
+}
+
 // Клик по кнопке "Готов"
 //nextBtn.addEventListener('click', () => {
 //  if (nextBtn.textContent === 'Готов') {
