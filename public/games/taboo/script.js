@@ -35,6 +35,50 @@ function joinSpectators(nick) {
   window.playerData = { nick, team: 'spectators', isReady: false };
 }
 
+function moveToTeam(nick) {
+  const spectatorBox = document.querySelector(`[title="${nick}"]`);
+  if (!spectatorBox) return;
+
+  // Удаляем из зрителей
+  spectatorBox.remove();
+
+  // Добавляем в команду (например, left)
+  const teamBox = document.querySelector('.team-left');
+  const teamName = teamBox.classList.contains('team-left') ? 'left' : 'right';
+
+  // Создаём элемент для команды
+  const playerBox = document.createElement('div');
+  playerBox.className = 'player-box';
+  playerBox.textContent = nick;
+  playerBox.title = nick;
+  playerBox.style.margin = '5px';
+  playerBox.style.padding = '5px';
+  playerBox.style.background = 'rgba(255, 255, 255, 0.1)';
+  playerBox.style.border = '1px solid var(--border)';
+  playerBox.style.borderRadius = '4px';
+  playerBox.style.color = 'white';
+  playerBox.style.fontSize = '12px';
+  playerBox.style.cursor = 'pointer';
+  playerBox.onclick = () => moveToSpectators(nick);
+
+  teamBox.appendChild(playerBox);
+}
+
+function moveToSpectators(nick) {
+  const playerBox = document.querySelector(`[title="${nick}"]`);
+  if (!playerBox) return;
+
+  const list = document.getElementById('spectators-list');
+  const box = document.createElement('div');
+  box.className = 'spectator-box';
+  box.textContent = nick;
+  box.title = nick;
+  box.onclick = () => moveToTeam(nick);
+  list.appendChild(box);
+
+  playerBox.remove();
+}
+
 // Вызов при загрузке
 document.addEventListener('DOMContentLoaded', () => {
   initNickname();
