@@ -9,12 +9,22 @@ function initNickname() {
     modal.remove(); // Удаляем модалку
     joinSpectators(savedNick); // Добавляем в зрителей
   } else {
+    // Обработчик клика
     btn.addEventListener('click', () => {
       const nick = input.value.trim();
-      if (nick) {
+      if (nick && nick.length <= 32) {
         localStorage.setItem('userNick', nick);
         modal.remove();
         joinSpectators(nick);
+      } else {
+        alert('Ник должен быть от 1 до 32 символов');
+      }
+    });
+
+    // Ввод по Enter
+    input.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        btn.click();
       }
     });
 
@@ -29,7 +39,7 @@ function joinSpectators(nick) {
   box.className = 'spectator-box';
   box.textContent = nick;
   box.title = nick;
-  box.onclick = () => moveToTeam(nick); // Позже реализуем переход в команду
+  box.onclick = () => moveToTeam(nick);
   list.appendChild(box);
 
   window.playerData = { nick, team: 'spectators', isReady: false };
