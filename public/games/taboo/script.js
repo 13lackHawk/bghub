@@ -1,3 +1,45 @@
+// === Ввод ника при первом заходе ===
+function initNickname() {
+  const savedNick = localStorage.getItem('userNick');
+  const modal = document.getElementById('nickname-modal');
+  const input = document.getElementById('nickname-input');
+  const btn = document.getElementById('nickname-ok');
+
+  if (savedNick) {
+    modal.remove(); // Удаляем модалку
+    joinSpectators(savedNick); // Добавляем в зрителей
+  } else {
+    btn.addEventListener('click', () => {
+      const nick = input.value.trim();
+      if (nick) {
+        localStorage.setItem('userNick', nick);
+        modal.remove();
+        joinSpectators(nick);
+      }
+    });
+
+    input.focus();
+  }
+}
+
+// Добавить игрока в зрителей
+function joinSpectators(nick) {
+  const list = document.getElementById('spectators-list');
+  const box = document.createElement('div');
+  box.className = 'spectator-box';
+  box.textContent = nick.charAt(0).toUpperCase();
+  box.title = nick;
+  box.onclick = () => moveToTeam(nick); // Позже реализуем переход в команду
+  list.appendChild(box);
+
+  window.playerData = { nick, team: 'spectators', isReady: false };
+}
+
+// Вызов при загрузке
+document.addEventListener('DOMContentLoaded', () => {
+  initNickname();
+});
+
 // === Логика хоста ===
 let isHost = false;
 
