@@ -1,26 +1,55 @@
+// === Гарантированная инициализация после загрузки DOM ===
+function waitForEl(selector, callback) {
+  const el = document.querySelector(selector);
+  if (el) {
+    callback(el);
+  } else {
+    setTimeout(() => {
+      waitForEl(selector, callback);
+    }, 100);
+  }
+}
+
 // === Ввод ника при первом заходе ===
 function initNickname() {
+  console.log('initNickname: запуск');
+
   const savedNick = localStorage.getItem('userNick');
   const modal = document.getElementById('nickname-modal');
   const input = document.getElementById('nickname-input');
   const btn = document.getElementById('nickname-ok');
 
   if (!modal || !input || !btn) {
-    console.error('Элементы модалки не найдены');
+    console.error('initNickname: элементы не найдены', { modal, input, btn });
     return;
   }
 
   if (savedNick) {
+    console.log('Ник найден в localStorage:', savedNick);
     modal.remove();
     joinSpectators(savedNick);
   } else {
-    // Убедимся, что кнопка не имеет дублирующих обработчиков
-    btn.onclick = null;
-    btn.addEventListener('click', handleNicknameSubmit);
+    console.log('Ник не найден, показываем модалку');
+
+    btn.onclick = function () {
+      const nick = input.value.trim();
+      if (!nick) {
+        alert('Введите никнейм');
+        return;
+      }
+      if (nick.length > 32) {
+        alert('Ник не должен превышать 32 символа');
+        return;
+      }
+
+      localStorage.setItem('userNick', nick);
+      modal.remove();
+      joinSpectators(nick);
+    };
 
     input.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        handleNicknameSubmit();
+        btn.click();
       }
     });
 
@@ -28,29 +57,12 @@ function initNickname() {
   }
 }
 
-function handleNicknameSubmit() {
-  const input = document.getElementById('nickname-input');
-  const nick = input.value.trim();
-
-  if (!nick) {
-    alert('Введите никнейм');
-    return;
-  }
-
-  if (nick.length > 32) {
-    alert('Ник не должен превышать 32 символа');
-    return;
-  }
-
-  localStorage.setItem('userNick', nick);
-  document.getElementById('nickname-modal').remove();
-  joinSpectators(nick);
-}
-
-// Добавить игрока в зрителей
 function joinSpectators(nick) {
   const list = document.getElementById('spectators-list');
-  if (!list) return;
+  if (!list) {
+    console.error('Список зрителей не найден');
+    return;
+  }
 
   const box = document.createElement('div');
   box.className = 'spectator-box';
@@ -60,6 +72,20 @@ function joinSpectators(nick) {
   list.appendChild(box);
 
   window.playerData = { nick, team: 'spectators', isReady: false };
+  console.log('Игрок добавлен в зрителей:', nick);
+}
+
+// === Запускаем только когда DOM готов и элементы доступны ===
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    waitForEl('#nickname-modal', () => {
+      setTimeout(initNickname, 200);
+    });
+  });
+} else {
+  waitForEl('#nickname-modal', () => {
+    setTimeout(initNickname, 200);
+  });
 }
 
 // === Вызов после полной загрузки DOM и всех скриптов ===
