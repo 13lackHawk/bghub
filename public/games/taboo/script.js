@@ -112,8 +112,11 @@ function moveToTeam(targetTeam) {
 
   // Удаляем из текущего места
   if (spectatorBox) {
+    console.log('Удалили из зрителей');
     spectatorBox.remove();
-  } else if (playerInTeam) {
+  }
+  if (playerInTeam) {
+    console.log('Удалили из команды');
     playerInTeam.remove();
   }
 
@@ -185,6 +188,7 @@ function joinTeam(side) {
 
   // Добавляем в новую команду
   const teamBox = document.querySelector(`.team-${targetTeam}`);
+  console.log('Добавляем в команду:', targetTeam);
   teamBox.appendChild(playerBox);
 }
 
