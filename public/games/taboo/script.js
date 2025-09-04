@@ -97,43 +97,41 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 100);
 });
 
-function moveToTeam(nick) {
-  const spectatorBox = document.querySelector(`[title="${nick}"]`);
-  if (!spectatorBox) return;
+// Переместить игрока в команду
+function moveToTeam(targetTeam) {
+  const nick = window.playerData?.nick;
+  if (!nick) return;
 
-  // Если игрок уже в команде — ничего не делаем
-  const playerBox = document.querySelector(`[title="${nick}"]`);
-  if (playerBox && playerBox.parentElement.classList.contains('team-left') || playerBox.parentElement.classList.contains('team-right')) {
-    return;
+  const currentTeam = window.playerData.team;
+  const spectatorBox = document.querySelector(`.spectator-box[title="${nick}"]`);
+  const playerInTeam = document.querySelector(`.player-box[title="${nick}"]`);
+
+  // Если уже в целевой команде — ничего не делаем
+  if (currentTeam === targetTeam) return;
+
+  // Удаляем из текущего места
+  if (spectatorBox) {
+    spectatorBox.remove();
+  } else if (playerInTeam) {
+    playerInTeam.remove();
   }
 
-  // Удаляем из зрителей
-  spectatorBox.remove();
-
-  // Добавляем в команду (например, left)
-  const teamBox = document.querySelector('.team-left');
-  const teamName = teamBox.classList.contains('team-left') ? 'left' : 'right';
-
-  // Создаём элемент для команды
+  // Добавляем в новую команду
+  const teamBox = document.querySelector(`.team-${targetTeam}`);
   const playerBox = document.createElement('div');
   playerBox.className = 'player-box';
   playerBox.textContent = nick;
   playerBox.title = nick;
-  playerBox.style.margin = '5px';
-  playerBox.style.padding = '5px';
-  playerBox.style.background = 'rgba(255, 255, 255, 0.1)';
-  playerBox.style.border = '1px solid var(--border)';
-  playerBox.style.borderRadius = '4px';
-  playerBox.style.color = 'white';
-  playerBox.style.fontSize = '12px';
-  playerBox.style.cursor = 'pointer';
   playerBox.onclick = () => moveToSpectators(nick);
-
   teamBox.appendChild(playerBox);
+
+  // Обновляем данные игрока
+  window.playerData.team = targetTeam;
 }
 
+// Вернуться в зрителей
 function moveToSpectators(nick) {
-  const playerBox = document.querySelector(`[title="${nick}"]`);
+  const playerBox = document.querySelector(`.player-box[title="${nick}"]`);
   if (!playerBox) return;
 
   const list = document.getElementById('spectators-list');
@@ -141,10 +139,11 @@ function moveToSpectators(nick) {
   box.className = 'spectator-box';
   box.textContent = nick;
   box.title = nick;
-  box.onclick = () => moveToTeam(nick);
+  box.onclick = () => moveToTeam('left'); // По умолчанию — в левую команду
   list.appendChild(box);
 
   playerBox.remove();
+  window.playerData.team = 'spectators';
 }
 
 // Вызов при загрузке
