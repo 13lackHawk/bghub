@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Переместить игрока в команду
 function moveToTeam(targetTeam) {
+  console.log('moveToTeam вызвана:', targetTeam);
   const nick = window.playerData?.nick;
   if (!nick) return;
 
