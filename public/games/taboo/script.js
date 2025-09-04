@@ -1,3 +1,5 @@
+console.log('✅ script.js загружен');
+
 // === Гарантированная инициализация после загрузки DOM ===
 function waitForEl(selector, callback) {
   const el = document.querySelector(selector);
