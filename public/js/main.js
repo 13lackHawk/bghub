@@ -83,6 +83,18 @@ function toggleTheme() {
 // Делаем функцию доступной глобально
 window.toggleTheme = toggleTheme;
 
+function toggleSettings() {
+  const menu = document.getElementById('settings-menu');
+  if (menu.style.display === 'flex') {
+    menu.style.display = 'none';
+  } else {
+    menu.style.display = 'flex';
+  }
+}
+
+// ✅ Делаем доступной глобально
+window.toggleSettings = toggleSettings;
+
 // === Восстановление темы при загрузке ===
 document.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('theme');
