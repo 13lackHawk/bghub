@@ -17,6 +17,11 @@ function initNickname() {
   console.log('initNickname: запуск');
 
   const savedNick = localStorage.getItem('userNick');
+  if (savedNick) {
+  window.playerData = { nick: savedNick, team: 'spectators' };
+  modal.remove();
+  joinSpectators(savedNick);
+  }
   const modal = document.getElementById('nickname-modal');
   const input = document.getElementById('nickname-input');
   const btn = document.getElementById('nickname-ok');
@@ -269,8 +274,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (leftTeam && rightTeam) {
     console.log('✅ Зоны команд найдены, привязываем обработчики');
-    leftTeam.onclick = () => moveToTeam('left');
-    rightTeam.onclick = () => moveToTeam('right');
+
+    leftTeam.onclick = () => {
+      const nick = window.playerData?.nick;
+      if (nick) moveToTeam('left');
+    };
+
+    rightTeam.onclick = () => {
+      const nick = window.playerData?.nick;
+      if (nick) moveToTeam('right');
+    };
   } else {
     console.error('❌ Зоны команд не найдены');
   }
