@@ -5,26 +5,22 @@ function initNickname() {
   const input = document.getElementById('nickname-input');
   const btn = document.getElementById('nickname-ok');
 
-  if (savedNick) {
-    modal.remove(); // Удаляем модалку
-    joinSpectators(savedNick); // Добавляем в зрителей
-  } else {
-    // Обработчик клика
-    btn.addEventListener('click', () => {
-      const nick = input.value.trim();
-      if (nick && nick.length <= 32) {
-        localStorage.setItem('userNick', nick);
-        modal.remove();
-        joinSpectators(nick);
-      } else {
-        alert('Ник должен быть от 1 до 32 символов');
-      }
-    });
+  if (!modal || !input || !btn) {
+    console.error('Элементы модалки не найдены');
+    return;
+  }
 
-    // Ввод по Enter
+  if (savedNick) {
+    modal.remove();
+    joinSpectators(savedNick);
+  } else {
+    // Убедимся, что кнопка не имеет дублирующих обработчиков
+    btn.onclick = null;
+    btn.addEventListener('click', handleNicknameSubmit);
+
     input.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
-        btn.click();
+        handleNicknameSubmit();
       }
     });
 
@@ -32,9 +28,30 @@ function initNickname() {
   }
 }
 
+function handleNicknameSubmit() {
+  const input = document.getElementById('nickname-input');
+  const nick = input.value.trim();
+
+  if (!nick) {
+    alert('Введите никнейм');
+    return;
+  }
+
+  if (nick.length > 32) {
+    alert('Ник не должен превышать 32 символа');
+    return;
+  }
+
+  localStorage.setItem('userNick', nick);
+  document.getElementById('nickname-modal').remove();
+  joinSpectators(nick);
+}
+
 // Добавить игрока в зрителей
 function joinSpectators(nick) {
   const list = document.getElementById('spectators-list');
+  if (!list) return;
+
   const box = document.createElement('div');
   box.className = 'spectator-box';
   box.textContent = nick;
@@ -44,6 +61,13 @@ function joinSpectators(nick) {
 
   window.playerData = { nick, team: 'spectators', isReady: false };
 }
+
+// === Вызов после полной загрузки DOM и всех скриптов ===
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    initNickname();
+  }, 100);
+});
 
 function moveToTeam(nick) {
   const spectatorBox = document.querySelector(`[title="${nick}"]`);
