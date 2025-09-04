@@ -369,6 +369,79 @@
   </div>
 
   <script src="/js/main.js"></script>
-  <script src="/games/taboo/script.js"></script>
+  <!--<script src="/games/taboo/script.js"></script> -->
+  <script>
+    console.log('✅ Встроенный скрипт работает');
+  
+    function waitForEl(selector, callback) {
+      const el = document.querySelector(selector);
+      if (el) {
+        callback(el);
+      } else {
+        setTimeout(() => {
+          waitForEl(selector, callback);
+        }, 100);
+      }
+    }
+  
+    function initNickname() {
+      console.log('initNickname: запуск');
+      const savedNick = localStorage.getItem('userNick');
+      const modal = document.getElementById('nickname-modal');
+      const input = document.getElementById('nickname-input');
+      const btn = document.getElementById('nickname-ok');
+  
+      if (!modal || !input || !btn) {
+        console.error('initNickname: элементы не найдены', { modal, input, btn });
+        return;
+      }
+  
+      if (savedNick) {
+        console.log('Ник найден:', savedNick);
+        modal.remove();
+        joinSpectators(savedNick);
+      } else {
+        console.log('Показываем модалку');
+        btn.onclick = function () {
+          const nick = input.value.trim();
+          if (!nick) {
+            alert('Введите никнейм');
+            return;
+          }
+          if (nick.length > 32) {
+            alert('Не более 32 символов');
+            return;
+          }
+          localStorage.setItem('userNick', nick);
+          modal.remove();
+          joinSpectators(nick);
+        };
+  
+        input.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') btn.click();
+        });
+  
+        input.focus();
+      }
+    }
+  
+    function joinSpectators(nick) {
+      const list = document.getElementById('spectators-list');
+      if (!list) return;
+      const box = document.createElement('div');
+      box.className = 'spectator-box';
+      box.textContent = nick;
+      box.title = nick;
+      box.onclick = () => moveToTeam(nick);
+      list.appendChild(box);
+      window.playerData = { nick, team: 'spectators' };
+    }
+  
+    document.addEventListener('DOMContentLoaded', () => {
+      waitForEl('#nickname-modal', () => {
+        setTimeout(initNickname, 100);
+      });
+    });
+  </script>
 </body>
 </html>
