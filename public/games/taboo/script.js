@@ -276,6 +276,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+// === Привязка кликов после загрузки DOM ===
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOMContentLoaded: сработал');
+
+  // Ждём, пока появятся зоны
+  const waitForTeams = () => {
+    const left = document.querySelector('.team-left');
+    const right = document.querySelector('.team-right');
+
+    if (left && right) {
+      console.log('Зоны найдены, привязываем клики');
+      left.onclick = () => moveToTeam('left');
+      right.onclick = () => moveToTeam('right');
+    } else {
+      setTimeout(waitForTeams, 100);
+    }
+  };
+
+  waitForTeams();
+});
+
 // Клик по кнопке "Готов"
 //nextBtn.addEventListener('click', () => {
 //  if (nextBtn.textContent === 'Готов') {
