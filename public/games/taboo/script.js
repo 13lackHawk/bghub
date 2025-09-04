@@ -257,6 +257,20 @@ document.querySelector('.team-right').onclick = function () {
   moveToTeam('right');
 };
 
+// === Привязка кликов к зонам команд ===
+document.addEventListener('DOMContentLoaded', () => {
+  const leftTeam = document.querySelector('.team-left');
+  const rightTeam = document.querySelector('.team-right');
+
+  if (leftTeam && rightTeam) {
+    console.log('✅ Зоны команд найдены, привязываем обработчики');
+    leftTeam.onclick = () => moveToTeam('left');
+    rightTeam.onclick = () => moveToTeam('right');
+  } else {
+    console.error('❌ Зоны команд не найдены');
+  }
+});
+
 // Клик по кнопке "Готов"
 //nextBtn.addEventListener('click', () => {
 //  if (nextBtn.textContent === 'Готов') {
