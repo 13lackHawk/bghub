@@ -249,6 +249,15 @@ function setScore(wordId, value) {
   scoreEl.textContent = value;
 }
 
+// === Обработчики кликов по зонам команд ===
+document.querySelector('.team-left').onclick = function () {
+  moveToTeam('left');
+};
+
+document.querySelector('.team-right').onclick = function () {
+  moveToTeam('right');
+};
+
 // Клик по кнопке "Готов"
 //nextBtn.addEventListener('click', () => {
 //  if (nextBtn.textContent === 'Готов') {
